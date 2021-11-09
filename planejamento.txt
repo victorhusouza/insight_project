@@ -1,0 +1,148 @@
+1. Etapas de um projeto de Ciência de Dados:
+
+	Questão de Negócio -> Entendimento do Negócio -> Coleta de dados -> Limpeza de dados ->
+	Exploração de dados -> Modelagem de dados -> Aplicação dos algoritimos de ML -> 		Avaliação da performance dos modelos -> Publicação de Modelo
+	
+2. O Projeto de insights:
+	
+	Objetivo: Gerar insight através da análise e manipulação dos dados para auxiliar a tomada de decisão.
+	Etapas: Questão de Negócio -> Entendimento do Negócio -> Coleta de 		dados -> Limpeza de dados -> Exploração de dados
+	
+1.1.1 Questão de Negócio
+
+	1. Quais são os imóveis que a House Rocket deveria comprar e por qual preço ?
+	2. Uma vez comprado, qual o melhor momento para vendê-lo e por qual preço?
+
+1.1.2 Entendimento do Negócio
+
+	1. Produto final ( o que realmente vou entregar? Planilha, modelo ML, email )
+		- 2 Relatórios:
+			- Relatório com sugestões de compra de imóvel por um valor recomendado
+			- Relatório com sugestões de venda de um imóvel por um valor recomendado
+	
+	2. Quais são as ferramentas ( o que eu preciso para realizar este projeto? )
+		- Python 3.8.0
+		- Pycharm
+		- Jupyter Notebook
+	
+	3. Proecesso ( quais são os passos necessários para alcançar meu objetivo )
+	
+		1. Quais são os imóveis que a House Rocket deveria comprar e por qual preço ?
+		
+			Plano 01:
+			  - Coletar os dados do site Kaggle
+			  - Agrupar os dados por região (zipcode)
+			  - Dentro de cada região, vou encontrar a mediana dos preços dos imóveis.
+			  - Vou sugerir que os imóveis que estão abaixo do preço mediano de cada região e que 				  estejam em boas condições, sejam comprados.
+			  
+			  
+			  Exemplo:
+			  	Imovel cond | Região | Preço do imóvel | Preço do mediana | Condição | Status 
+				10330       | 302349 |    450.000      |     500.000      |  3       | Compra 
+				10335       | 302349 |    750.000      |     500.000      |  3       | Não Compra
+				10335       | 302349 |    150.000      |     500.000      |  1       | Não Compra  
+				
+				df['price_median'] = data[['zipcode', 							    'price']].groupby('zipcode').meadian().reset_index()
+				df2 = pd.merge(data, df, on = 'zipcode', how = 'inner')
+				
+				for i in range(len(df2)):
+					if (df2.loc[i, 'price'] < df2['price_median']) & ( df2['condition'] >= 2): 
+						df2['status'] = 'compra'
+					else: 
+						df2['status'] = 'não compra'
+		2. Uma vez comprado, qual o melhor momento para vendê-lo e por qual preço?
+		
+			Plano 01:
+				- Com os dados já tratados
+				- Agrupar os imóveis por região e sazonalidade
+				- Dentro de cada região e sazonalidade, vou calcular a mediana de preço
+				- Condições de venda:
+				  1. Se o preço da compra for maior que a mediana da região + sazonalidade
+				    O preço da venda será igual ao preço da compra + 10%
+				  
+				  2. Se o preço da compra for menor que a mediana da região + sazonalidade
+				    O preço da venda será igual ao preço da compra + 30%
+				
+			Exemplo:
+			  	Imovel cond | Região | Temporada|  Preço da Mediana | Preço da Compra | Preço Venda    | Lucro
+				10330       | 308349 |  Verão   |     800.000       |  450.000        |  450.000 + 30% | ??
+				10330       | 308349 |  Inverno |     400.000       |  450.000        |  450.000 + 10% | ??
+				
+1.1.3 Coleta e Limpeza dos Dados
+	
+	- Coletar os dados do site do Kaggle
+	- Limpeza dos dados
+	  - Remover datas erradas
+	  - Remover outliers devido a erros do sistema			
+				
+
+1.1.4 Explocaração de Dados(EDA):
+
+	1. Descobrir Insights para o time de negócio 			
+	2. Explorar os dados para identificar o impacto dos atributos nos algoritmos de ML
+	3. O que são insight para o negócio?
+	  - Insights são descobertas através dos dados que são inesperadas para as pessoas.
+	  - Insight precisa ser acionável, caso contrário é apenas uma curiosidade
+	  
+	  Exemplos:
+	    - Durante o período de natal, vende-se mais casas do que na páscoa (Descoberta)
+	    - Imóveis com porão são maiores do que imóveis sem porão (não - acionável)
+	    - Imóveis com porão são 30% mais caros do que outros imóveis (insight)
+	    
+	4. como fazer para criar as hipótese?
+	
+	  - Toda hipótese de neǵocio tem três características
+	    - Deve ser uma afirmação
+	    - Deve ser uma comparação entre 2 variavéis
+	    - Você precisa definir um valor base
+	    
+	H1: Imóveis que possuem vista para a água, são 30% + caros na média.
+	H2: Imóveis com data de construção menor que 1955, são 50% mais baratos em média.
+	H3: Imóveis sem porão possuem área total( sqft lot), são 40% maiores do que imóveis sem porão
+	H4: O crescumento do preço dos imóveis (YoY) é de 10%
+	H5: Imoveis com 3 banheiros tem um crescimento de MoM de 15% no preço
+	H6:
+	H7:
+	H8:
+	H9:
+	H10:
+	
+	2.0 Transformando o curso Python do ZERO ao DS
+	  
+	  2.1 O qué é obrigatório em um projeto de portfólio
+	    
+	    1. Questão de Negócio
+	      - O que você quer resolver?
+	      1. Quais são os imóveis que a House Rocket deveria comprar e por qual preço ?
+	      2. Uma vez comprado, qual o melhor momento para vendê-lo e por qual preço ?
+	      
+	    2. Premissas do Negócio
+	      - Assumo que as casa ficam fechadas para visitas no inverno
+	    
+	    3. Planejamento da Solução
+	    
+	    4. Os 5 principais insights de negócio
+	    
+	    5. Resultados financeiros para o negócio
+	    
+	    6. Conclusão
+	      - Seu objetivo inicial foi alcançado?
+	      
+	    7. Próximos passos
+	    
+	 3. Exercícios:
+	 
+	   1. Criar visualizações para responder cada uma das 10 hipóteses de negócio;
+	   2. Construir uma tabela com recomendações de compra ou não compra.
+	   3. Construir uma tabela com recomendações de venda com acréscimo de 10% ou 30%
+	   4. Fornecer as hipóteses e as tableas no Streamlit
+	   5. Transformar o projeto do curso Python Zero ao DS
+	   6. Salvar os códigos dentro do Github
+	   7. Escrever o README com os requisitos obrigatórios para um portfólio de projetos
+				
+				
+				
+				
+				
+				
+		
