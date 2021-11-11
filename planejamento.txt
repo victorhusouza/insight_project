@@ -1,7 +1,7 @@
 1. Etapas de um projeto de Ciência de Dados:
 
 	Questão de Negócio -> Entendimento do Negócio -> Coleta de dados -> Limpeza de dados ->
-	Exploração de dados -> Modelagem de dados -> Aplicação dos algoritimos de ML -> 		Avaliação da performance dos modelos -> Publicação de Modelo
+	Exploração de dados -> Modelagem de dados -> Aplicação dos algoritimos de ML -> Avaliação da performance dos modelos -> Publicação de Modelo
 	
 2. O Projeto de insights:
 	
@@ -42,7 +42,7 @@
 				10335       | 302349 |    750.000      |     500.000      |  3       | Não Compra
 				10335       | 302349 |    150.000      |     500.000      |  1       | Não Compra  
 				
-				df['price_median'] = data[['zipcode', 							    'price']].groupby('zipcode').meadian().reset_index()
+				df['price_median'] = data[['zipcode', 'price']].groupby('zipcode').meadian().reset_index()
 				df2 = pd.merge(data, df, on = 'zipcode', how = 'inner')
 				
 				for i in range(len(df2)):
@@ -66,7 +66,7 @@
 			Exemplo:
 			  	Imovel cond | Região | Temporada|  Preço da Mediana | Preço da Compra | Preço Venda    | Lucro
 				10330       | 308349 |  Verão   |     800.000       |  450.000        |  450.000 + 30% | ??
-				10330       | 308349 |  Inverno |     400.000       |  450.000        |  450.000 + 10% | ??
+				10338       | 308349 |  Inverno |     400.000       |  450.000        |  450.000 + 10% | ??
 				
 1.1.3 Coleta e Limpeza dos Dados
 	
@@ -99,10 +99,10 @@
 	H1: Imóveis que possuem vista para a água, são 30% + caros na média.
 	H2: Imóveis com data de construção menor que 1955, são 50% mais baratos em média.
 	H3: Imóveis sem porão possuem área total( sqft lot), são 40% maiores do que imóveis sem porão
-	H4: O crescumento do preço dos imóveis (YoY) é de 10%
+	H4: O crescimento do preço dos imóveis (YoY) é de 10%
 	H5: Imoveis com 3 banheiros tem um crescimento de MoM de 15% no preço
-	H6:
-	H7:
+	H6: Imóveis reformados após o ano 2000 são 20% mais caros
+	H7: Imóveis 
 	H8:
 	H9:
 	H10:
@@ -135,14 +135,7 @@
 	   1. Criar visualizações para responder cada uma das 10 hipóteses de negócio;
 	   2. Construir uma tabela com recomendações de compra ou não compra.
 	   3. Construir uma tabela com recomendações de venda com acréscimo de 10% ou 30%
-	   4. Fornecer as hipóteses e as tableas no Streamlit
+	   4. Fornecer as hipóteses e as tabelas no Streamlit
 	   5. Transformar o projeto do curso Python Zero ao DS
 	   6. Salvar os códigos dentro do Github
 	   7. Escrever o README com os requisitos obrigatórios para um portfólio de projetos
-				
-				
-				
-				
-				
-				
-		
