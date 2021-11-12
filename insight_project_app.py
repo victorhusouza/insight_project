@@ -244,6 +244,10 @@ def bq2(df):
 
     st.dataframe(b5[['id', 'date','season', 'zipcode', 'price', 'price_median', 'price_median_season', 'Sell Price', 'Profit']])
 
+    b6 = b5[['season', 'price']].groupby('season').sum().reset_index()
+    fig = px.bar(b6, x='season', y='price', labels = {'season': 'Season', 'price': 'Price'}, color = 'season', title='Average Price by Season', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
     return None
 
 def hypo1(df):
@@ -391,4 +395,4 @@ if __name__ == '__main__':
 
     hypo5(data)
 
-    st.markdown('New Updates to come soon')
+    st.markdown('New Updates coming soon')
