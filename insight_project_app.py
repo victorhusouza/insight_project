@@ -339,4 +339,4 @@ if __name__ == '__main__':
 
     hypo5(data)
 
-    st.title('New Updates to come soon')
+    st.markdown('New Updates to come soon')
