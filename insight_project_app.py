@@ -248,21 +248,43 @@ def bq2(df):
 
 def hypo1(df):
 
-    st.header('Hypothesis 1: Usually real state with waterfront view are more 30% expensive in average')
-
+    # create variable for plot chart
     h1 = df[['waterview', 'price']].groupby('waterview').mean().reset_index()
 
+    # head
+    st.header('Hypothesis 1: Usually real state with waterfront view are 30% more expensive in average')
+
+    # answer for hypothesis
+    p = h1.loc[1, 'price'] - h1.loc[0, 'price']
+    p = p + 100
+    por = p / h1.loc[0, 'price']
+    por = por * 100
+    st.subheader('False, in fact real state with water fron view are {:.2f}% more expensive at average'.format(por))
+
+    # plot
     fig = px.bar(h1, x='waterview', y='price', labels = {'waterview': 'Water view', 'price': 'Price'}, title='Waterfront View Average Price', height=700)
     st.plotly_chart(fig, use_container_width=True)
+
+
 
     return None
 
 def hypo2(df):
 
-    st.header('Hypothesis 2: Real state with year of construction less than 1955 are 50% cheaper in average')
-
+    # create variable for plot chart
     h2 = df[['yr_b_mean', 'price']].groupby('yr_b_mean').mean().reset_index()
 
+    # head
+    st.header('Hypothesis 2: Real state with year of construction less than 1955 are 50% cheaper in average')
+
+    # answer for hypothesis
+    p = h2.loc[1, 'price'] - h2.loc[0, 'price']
+    p = p + 100
+    por = p / h2.loc[0, 'price']
+    por = por * 100
+    st.subheader('False, real state w/ year construction less than 1955 are {:.2f}%  cheaper at average.'.format(por))
+
+    # plot
     fig = px.bar(h2, x='yr_b_mean', y='price', labels = {'yr_b_mean': 'Year Built', 'price': 'Price'}, title='Construction Year Average Price', height=700)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -270,10 +292,20 @@ def hypo2(df):
 
 def hypo3(df):
 
-    st.header('Hypothesis 3: Real state without basement, have a greater sqft lot about 40% in average')
-
+    # create variable for plot chart
     h3 = df[['has_basement', 'sqft_lot']].groupby('has_basement').sum().reset_index()
 
+    # head
+    st.header('Hypothesis 3: Real state without basement, have a greater sqft lot about 40% in average')
+
+    # answer for hypothesis
+    p = h3.loc[0, 'sqft_lot'] - h3.loc[1, 'sqft_lot']
+    p = p + 100
+    por = p / h3.loc[0, 'sqft_lot']
+    por = por * 100
+    st.subheader('True, real state with basement does have greater sqft lot it is {:.2f}% .'.format(por))
+
+    # plot
     fig = px.bar(h3, x='has_basement', y='sqft_lot', labels = {'has_basement': 'Basement', 'price': 'Price'}, title='Basement x No Basement Average Price', height=700)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -281,10 +313,20 @@ def hypo3(df):
 
 def hypo4(df):
 
-    st.header('Hypothesis 4: The price growth YoYof real state is 10%')
-
+    # create variable for plot chart
     h4 = df[['year', 'price']].groupby('year').sum().reset_index()
 
+    # head
+    st.header('Hypothesis 4: The price growth YoY of real state is 10%')
+
+    # answer for hypothesis
+    p = h4.loc[1, 'price'] - h4.loc[0, 'price']
+    p = p + 100
+    por = p / h4.loc[0, 'price']
+    por = por * 100
+    st.subheader('False, instead it has a {:.2f}% growth YoY.'.format(por))
+
+    # plot
     fig = px.bar(h4, x='year', y='price', labels = {'year': 'Year', 'price': 'Price'}, title='Growth YoY Average Price', height=700)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -292,11 +334,21 @@ def hypo4(df):
 
 def hypo5(df):
 
+    # create variable for plot chart
+    h5 = df[['bathrooms', 'month', 'price']].groupby(['bathrooms', 'month']).sum().reset_index()
+    h5 = h5[h5['bathrooms'] == 3].reset_index()
+
+    # head
     st.header('Hypothesis 5: Real state with 3 bathrooms have a price growth MoM of 15%')
 
-    h5 = df[['bathrooms', 'month', 'price']].groupby(['bathrooms', 'month']).sum().reset_index()
-    h5 = h5[h5['bathrooms'] == 3]
+    # answer for hypothesis
+    p = h5.loc[11, 'price'] - h5.loc[0, 'price']
+    p = p + 100
+    por = p / h5.loc[0, 'price']
+    por = por * 100
+    st.subheader('True, it is varies a lot during the month, although comparing the first and last month it gives a growth of {:.2f}%.'.format(por))
 
+    # plot
     fig = px.line(h5, x='month', y='price', labels = {'month': 'Month', 'price': 'Price'}, title='Real state w/ 3 Bathrooms Price Growth', height=700)
     st.plotly_chart(fig, use_container_width=True)
 
