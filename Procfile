@@ -1,1 +1,0 @@
-web: sh setup.sh && streamlit run insight_project_app.py
