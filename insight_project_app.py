@@ -256,14 +256,14 @@ def hypo1(df):
     h1 = df[['waterview', 'price']].groupby('waterview').mean().reset_index()
 
     # head
-    st.header('Hypothesis 1: Usually real state with waterfront view are 30% more expensive in average')
+    st.header('Hypothesis 1: Usually real state with waterfront view are 30% more expensive at average.')
 
     # answer for hypothesis
     p = h1.loc[1, 'price'] - h1.loc[0, 'price']
     p = p + 100
     por = p / h1.loc[0, 'price']
     por = por * 100
-    st.subheader('False, in fact real state with water fron view are {:.2f}% more expensive at average'.format(por))
+    st.subheader('False, in fact real state with water fron view are {:.2f}% more expensive at average.'.format(por))
 
     # plot
     fig = px.bar(h1, x='waterview', y='price', labels = {'waterview': 'Water view', 'price': 'Price'}, title='Waterfront View Average Price', height=700)
@@ -300,14 +300,14 @@ def hypo3(df):
     h3 = df[['has_basement', 'sqft_lot']].groupby('has_basement').sum().reset_index()
 
     # head
-    st.header('Hypothesis 3: Real state without basement, have a greater sqft lot about 40% in average')
+    st.header('Hypothesis 3: Real state without basement, have a greater sqft lot about 40% at average.')
 
     # answer for hypothesis
     p = h3.loc[0, 'sqft_lot'] - h3.loc[1, 'sqft_lot']
     p = p + 100
     por = p / h3.loc[0, 'sqft_lot']
     por = por * 100
-    st.subheader('True, real state with basement does have greater sqft lot it is {:.2f}% .'.format(por))
+    st.subheader('True, real state with basement does have greater sqft lot it is {:.2f}%.'.format(por))
 
     # plot
     fig = px.bar(h3, x='has_basement', y='sqft_lot', labels = {'has_basement': 'Basement', 'price': 'Price'}, title='Basement x No Basement Average Price', height=700)
@@ -321,14 +321,14 @@ def hypo4(df):
     h4 = df[['year', 'price']].groupby('year').sum().reset_index()
 
     # head
-    st.header('Hypothesis 4: The price growth YoY of real state is 10%')
+    st.header('Hypothesis 4: The price growth YoY of real state is 10%.')
 
     # answer for hypothesis
     p = h4.loc[1, 'price'] - h4.loc[0, 'price']
     p = p + 100
     por = p / h4.loc[0, 'price']
     por = por * 100
-    st.subheader('False, instead it has a {:.2f}% growth YoY.'.format(por))
+    st.subheader('False, instead it has a {:.2f}% decrease YoY.'.format(por))
 
     # plot
     fig = px.bar(h4, x='year', y='price', labels = {'year': 'Year', 'price': 'Price'}, title='Growth YoY Average Price', height=700)
@@ -343,14 +343,14 @@ def hypo5(df):
     h5 = h5[h5['bathrooms'] == 3].reset_index()
 
     # head
-    st.header('Hypothesis 5: Real state with 3 bathrooms have a price growth MoM of 15%')
+    st.header('Hypothesis 5: Real state with 3 bathrooms have a price growth MoM of 15%.')
 
     # answer for hypothesis
     p = h5.loc[11, 'price'] - h5.loc[0, 'price']
     p = p + 100
     por = p / h5.loc[0, 'price']
     por = por * 100
-    st.subheader('True, it is varies a lot during the month, although comparing the first and last month it gives a growth of {:.2f}%.'.format(por))
+    st.subheader('True, it is varies a lot during the months, although comparing the first and last month it gives a growth of {:.2f}%.'.format(por))
 
     # plot
     fig = px.line(h5, x='month', y='price', labels = {'month': 'Month', 'price': 'Price'}, title='Real state w/ 3 Bathrooms Price Growth', height=700)
