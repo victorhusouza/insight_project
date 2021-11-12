@@ -1,10 +1,10 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
+import plotly.express as px
 from streamlit_folium import folium_static
 import folium
 from folium.plugins import MarkerCluster
-import plotly.express as px
 from datetime import datetime
 
 pd.set_option('display.float_format', lambda x : '%.2f' % x)
@@ -126,12 +126,14 @@ def bq1(df):
 
     st.sidebar.header('Business Question 1 Filters')
 
-    # filter for zipcode
-    f_zipcode = st.sidebar.multiselect('Enter zipcode', df2['zipcode'].unique())
+    # FILTERS
 
-    if (f_zipcode != []) :
+    # filter for condition
+    f_condition = st.sidebar.multiselect('Enter Condition', sorted(set(df['condition'].unique())))
 
-        df2 = df2.loc[df2['zipcode'].isin(f_zipcode),:]
+    if (f_condition != []):
+
+        df2 = df2.loc[df2['condition'].isin(f_condition), :]
 
     else:
         df2 = df2.copy()
@@ -141,7 +143,6 @@ def bq1(df):
     max_price = int(df2['price'].max())
     avg_price = int(df2['price'].mean())
 
-    # data filtering
     f_price = st.sidebar.slider('Maximun Price', min_price, max_price, avg_price)
     df2 = df2[df2['price'] < f_price]
 
@@ -150,18 +151,9 @@ def bq1(df):
     max_price_median = int(df2['price_median'].max())
     avg_price_median = int(df2['price_median'].mean())
 
-    # data filtering
     f_price_median = st.sidebar.slider('Price Median Maximun', min_price_median, max_price_median, avg_price_median)
     df2 = df2[df2['price_median'] < f_price_median]
 
-    # filter for condition
-    f_condition = st.sidebar.multiselect('Enter Condition', sorted(set(df['condition'].unique())))
-    if (f_condition != []) :
-
-        df2 = df2.loc[df2['condition'].isin(f_condition),:]
-
-    else:
-        df2 = df2.copy()
 
     # filter only houses to buy
     df2 = df2[df2['status'] == 'buy']
@@ -173,6 +165,7 @@ def bq1(df):
 def bq2(df):
 
     # Business Question 2
+    st.subheader('2. Once bought the real state, when is the best moment to sell and at what price?')
 
     # create feature for price median and concatenate with dataset
     data = pd.DataFrame()
@@ -190,7 +183,6 @@ def bq2(df):
         else:
             df2.loc[i, 'status'] = 'do not buy'
 
-    st.subheader('2. Once bought the real state, when is the best moment to sell and at what price?')
 
     # categorize by season available
     df2['season'] = df2['month'].apply(lambda x: 'Spring' if (x >= 3) & (x <= 5) else 'Summer' if (x >= 6) & (x <= 8)
@@ -254,6 +246,62 @@ def bq2(df):
 
     return None
 
+def hypo1(df):
+
+    st.header('Hypothesis 1: Usually real state with waterfront view are more 30% expensive in average')
+
+    h1 = df[['waterview', 'price']].groupby('waterview').mean().reset_index()
+
+    fig = px.bar(h1, x='waterview', y='price', labels = {'waterview': 'Water view', 'price': 'Price'}, title='Waterfront View Average Price', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def hypo2(df):
+
+    st.header('Hypothesis 2: Real state with year of construction less than 1955 are 50% cheaper in average')
+
+    h2 = df[['yr_b_mean', 'price']].groupby('yr_b_mean').mean().reset_index()
+
+    fig = px.bar(h2, x='yr_b_mean', y='price', labels = {'yr_b_mean': 'Year Built', 'price': 'Price'}, title='Construction Year Average Price', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def hypo3(df):
+
+    st.header('Hypothesis 3: Real state without basement, have a greater sqft lot about 40% in average')
+
+    h3 = df[['has_basement', 'sqft_lot']].groupby('has_basement').sum().reset_index()
+
+    fig = px.bar(h3, x='has_basement', y='sqft_lot', labels = {'has_basement': 'Basement', 'price': 'Price'}, title='Basement x No Basement Average Price', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def hypo4(df):
+
+    st.header('Hypothesis 4: The price growth YoYof real state is 10%')
+
+    h4 = df[['year', 'price']].groupby('year').sum().reset_index()
+
+    fig = px.bar(h4, x='year', y='price', labels = {'year': 'Year', 'price': 'Price'}, title='Growth YoY Average Price', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def hypo5(df):
+
+    st.header('Hypothesis 5: Real state with 3 bathrooms have a price growth MoM of 15%')
+
+    h5 = df[['bathrooms', 'month', 'price']].groupby(['bathrooms', 'month']).sum().reset_index()
+    h5 = h5[h5['bathrooms'] == 3]
+
+    fig = px.line(h5, x='month', y='price', labels = {'month': 'Month', 'price': 'Price'}, title='Real state w/ 3 Bathrooms Price Growth', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
 if __name__ == '__main__':
     #ETL
     # extraction
@@ -270,8 +318,6 @@ if __name__ == '__main__':
 
     data = new_features(data)
 
-    st.write(data.columns)
-
     data_overview(data)
 
     st.header('Business Questions')
@@ -279,3 +325,16 @@ if __name__ == '__main__':
     bq1(data)
 
     bq2(data)
+
+    st.header('Hypothesis')
+
+
+    hypo1(data)
+
+    hypo2(data)
+
+    hypo3(data)
+
+    hypo4(data)
+
+    hypo5(data)
