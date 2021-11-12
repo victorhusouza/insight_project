@@ -338,3 +338,5 @@ if __name__ == '__main__':
     hypo4(data)
 
     hypo5(data)
+
+    st.title('New Updates to come soon')
