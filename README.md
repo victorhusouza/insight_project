@@ -16,7 +16,7 @@
   
 ## 3. Solution Strategy
 
-  I divided the solution strategy into two for each question:
+  I divided the solution strategy into the two questions:
   
      1. Which is the real state that House Rocket should buy and at what price?
      
