@@ -23,7 +23,8 @@
      
       - Group the data by zipcode.
       - Find the median price by each zipcode.
-      - The house price lower than the median and condition greater than 3, is a strong suggestion to buy.
+      - The house price lower than the median and condition greater than 3, 
+      is a strong suggestion to buy.
      
      2. Once bought, when is the best moment to sell and at what price?
       
