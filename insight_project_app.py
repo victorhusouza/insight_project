@@ -263,7 +263,7 @@ def hypo1(df):
     p = p + 100
     por = p / h1.loc[0, 'price']
     por = por * 100
-    st.subheader('False, in fact real state with water fron view are {:.2f}% more expensive at average.'.format(por))
+    st.subheader('False, in fact real state with waterfront view are {:.2f}% more expensive at average.'.format(por))
 
     # plot
     fig = px.bar(h1, x='waterview', y='price', labels = {'waterview': 'Water view', 'price': 'Price'}, title='Waterfront View Average Price', height=700)
