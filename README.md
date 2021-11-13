@@ -3,7 +3,8 @@
 
 ## 1. Business Question
 
-  House Rocket is a fictitious company based on Seattle , WA. It is a real state company with a core business of buy, renovated and sell houses or apartments, their CEO in a pursue to maximize their profit are looking for an analysis in their dataset to find the best businesses available to them, buying at a low price, renovate and sell it to a higher price, also want to know what is the best price they could sell to make most profit possible. He wants the answer for two questions:
+
+  House Rocket is a fictitious company based on Seatle , WA. It is a real state company with a core business of buy, renovated and sell houses or apartments, their CEO in a pursue to maximize their profit are looking for an analysis in their dataset to find the best businesses available to them, buying at a low price, renovate and sell it to a higher price, also want to know what is the best price they could sell to make most profit possible. He wants the answer for two questions:
   
      1. Which is the real state that House Rocket should buy and at what price?
      
@@ -43,13 +44,14 @@
 
   After analyzing all this dataset looking for the best businesses that could be made,
  let's take a look at how House Rocket could really make profit out of it.
- 
- | Season |   Profit    |
- | Autumn | 214,012,611 |
- | Spring | 244,234,470 |
- | Summer |	260,182,320 |
- | Winter |	145,300,366 |
- 
+
+|    Season      |     Profit      |
+|  ------------- | -------------   |
+|    Autumn      |   214,012,611   |  
+|    Spring      |   244,234,470   |  
+|    Summer      |   260,182,320   |  
+|    Winter      |   145,300,366   |
+
 ## 6. Conclusion
 
   As we could by this data, the best season to sell a house/apartment is in the summer, on the other hand
