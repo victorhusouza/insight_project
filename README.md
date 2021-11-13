@@ -61,3 +61,9 @@
   
   The next steps I would take for this project is, create more hypothesis, test new graphs and colors, and use a 
  machine learning model to find the best price to buy and sell.
+ 
+ 
+ # Links:
+  
+  datasource: https://www.kaggle.com/shivachandel/kc-house-data
+  webapp: https://insight-project-v1.herokuapp.com/
