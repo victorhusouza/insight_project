@@ -68,6 +68,6 @@
  
  # Links:
   
-  datasource: https://www.kaggle.com/shivachandel/kc-house-data
+  source: https://www.kaggle.com/shivachandel/kc-house-data
   
   webapp: https://insight-project-v1.herokuapp.com/
