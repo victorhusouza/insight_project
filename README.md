@@ -62,7 +62,7 @@
 ## 7. Lessons Learned
 ## 8. Next Steps
   
-  The next steps I would take for this project is, create more hypothesis, test new graphs and colors, and use a 
+  The next steps I would take for this project is, create new hypothesis, and use a 
  machine learning model to find the best price to buy and sell.
  
  
