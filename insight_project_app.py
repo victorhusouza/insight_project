@@ -49,20 +49,41 @@ def new_features(df):
     # feature for hypothesis 5
     df['month'] = pd.to_datetime(df['date']).dt.month
 
+    # feature for hypothesis 6
+    df['yr_ren'] = df['yr_renovated'].apply(lambda x: '>2000' if (x >= 2000) else '<2000 and >1985'
+    if (x >= 1985 and x < 2000) else 0)
+
+    # feature for hypothesis 7
+    df['ren'] = df['yr_renovated'].apply(lambda x: 'no' if (x == 0) else 'yes')
+
     # add feature
     df['price_m2'] = df['price'] / (df['sqft_lot'] / 10.764)
 
     return df
 
 def data_overview(df):
+
+    data = df
+
+    # filter
+    st.sidebar.header('Filter Average Metrics')
+    f_zipcode = st.sidebar.multiselect('Enter zipcode', data['zipcode'].unique())
+
+    if (f_zipcode != []):
+
+        data = data.loc[data['zipcode'].isin(f_zipcode), :]
+
+    else:
+        data = data.copy()
+
     # Average metrics
 
     c1, c2 = st.columns((2, 2))
 
-    df1 = df[['id', 'zipcode']].groupby('zipcode').count().reset_index()
-    df2 = df[['zipcode', 'price']].groupby('zipcode').mean().reset_index()
-    df3 = df[['sqft_living', 'zipcode']].groupby('zipcode').mean().reset_index()
-    df4 = df[['price_m2', 'zipcode']].groupby('zipcode').mean().reset_index()
+    df1 = data[['id', 'zipcode']].groupby('zipcode').count().reset_index()
+    df2 = data[['zipcode', 'price']].groupby('zipcode').mean().reset_index()
+    df3 = data[['sqft_living', 'zipcode']].groupby('zipcode').mean().reset_index()
+    df4 = data[['price_m2', 'zipcode']].groupby('zipcode').mean().reset_index()
 
     # merge
 
@@ -263,7 +284,7 @@ def hypo1(df):
     p = p + 100
     por = p / h1.loc[0, 'price']
     por = por * 100
-    st.subheader('False, in fact real state with watercorrfront view are {:.2f}% more expensive at average.'.format(por))
+    st.subheader('False, in fact real state with waterfront view are {:.2f}% more expensive at average.'.format(por))
 
     # plot
     fig = px.bar(h1, x='waterview', y='price', labels = {'waterview': 'Water view', 'price': 'Price'}, title='Waterfront View Average Price', height=700)
@@ -358,6 +379,47 @@ def hypo5(df):
 
     return None
 
+def hypo6(df):
+
+    # create variable for plot chart
+    h6 = df[['yr_ren', 'price']].groupby('yr_ren').sum().reset_index()
+    h6 = h6[h6['yr_ren'] != 0]
+
+    # head
+    st.header('Hypothesis 6: Houses renovated after 2000 are 20% more expensive than those between 1985 and 2000')
+
+    # answer for hypothesis
+    p = (h6.loc[2, 'price'] - h6.loc[1, 'price']) / h6.loc[1, 'price'] * 100
+    por = p
+    st.subheader('False, actually they are {:.2f}% more expensive.'.format(por))
+
+    # plot
+    fig = px.bar(h6, x='yr_ren', y='price', labels = {'yr_ren': 'Year Renovated', 'price': 'Price'}, title='Houses renovated after 2000 vs before 2000', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+
+def hypo7(df):
+
+    # create variable for plot chart
+    h7 = df[['ren', 'price']].groupby('ren').mean().reset_index()
+
+    # head
+    st.header('Hypothesis 7: Houses that were not renovated are 30% cheaper in average')
+
+    # answer for hypothesis
+    p = (h7.loc[1, 'price'] - h7.loc[0, 'price']) / h7.loc[1, 'price'] * 100
+    por = p
+    st.subheader('True, they are {:.2f}% cheaper.'.format(por))
+
+    # plot
+    fig = px.bar(h7, x='ren', y='price', labels={'ren': 'Renovated', 'price': 'Price'},
+                  title='Houses renovated after 2000 vs before 2000', height=700)
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
 if __name__ == '__main__':
     #ETL
     # extraction
@@ -394,5 +456,9 @@ if __name__ == '__main__':
     hypo4(data)
 
     hypo5(data)
+
+    hypo6(data)
+
+    hypo7(data)
 
     st.markdown('New Updates coming soon')
