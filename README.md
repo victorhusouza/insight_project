@@ -39,7 +39,7 @@
 
   1. Houses are 62% more expensive in the summer than in the winter.
   2. Houses with year built less than 1955 are very slightly cheaper than those with year built greater than 1955.
-  3. The real state market had a decrease price about 50% in 2015 compared to 2014.
+  3. Houses renovated after 2000 are 71% more expensive than those between 1985 and 2000.
   
 ## 5. Business Results
 
