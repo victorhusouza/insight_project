@@ -4,7 +4,7 @@
 ## 1. Business Question
 
 
-  House Rocket is a fictitious company based on Seatle , WA. It is a real state company with a core business of buy, renovated and sell houses or apartments, their CEO in a pursue to maximize their profit are looking for an analysis in their dataset to find the best businesses available to them, buying at a low price, renovate and sell it to a higher price, also want to know what is the best price they could sell to make most profit possible. He wants the answer for two questions:
+  House Rocket is a fictitious company based on Seatle, WA. It is a real state company with a core business of buy, renovated and sell houses or apartments, their CEO in a pursue to maximize their profit are looking for an analysis in their dataset to find the best businesses available to them, buying at a low price, renovate and sell it to a higher price, he also want to know what is the best price they could sell to make the most profit possible. He wants the answer for two questions:
   
      1. Which is the real state that House Rocket should buy and at what price?
      
@@ -12,8 +12,8 @@
      
 ## 2. Business Assumptions
 
-  - All the data assumptions are based on the dataset available
-  - The data are from in Seattle, WA real state market
+  - All the data assumptions, insights and hypotehsis are based on available dataset.
+  - The data is from Seattle, WA real state market.
   
 ## 3. Solution Strategy
 
@@ -21,7 +21,7 @@
   
      1. Which is the real state that House Rocket should buy and at what price?
      
-      - Group the data by zipcode.
+      - Group the dataset by zipcode.
       - Find the median price by each zipcode.
       - The house price lower than the median and condition greater than 3, 
       is a strong suggestion to buy.
@@ -55,17 +55,16 @@
 
 ## 6. Conclusion
 
-  As we could by this data, the best season to sell a house/apartment is in the summer, on the other hand
+  As we could see by this dataset, the best season to sell a house/apartment is in the summer, on the other hand
  the best moment to buy a house/apartment is in the winter. This is a great insight for House Rocket and it is
  possible to make a very good profit by this.
- 
-## 7. Lessons Learned
-## 8. Next Steps
+
+## 7. Next Steps
   
-  The next steps I would take for this project is, create new hypothesis, and use a 
+  The next steps I would take for this project is create new hypothesis, and use a 
  machine learning model to find the best price to buy and sell.
  
- 
+
  # Links:
   
   source: https://www.kaggle.com/shivachandel/kc-house-data

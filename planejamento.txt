@@ -101,9 +101,9 @@
 	H3: Imóveis sem porão possuem área total( sqft lot), são 40% maiores do que imóveis sem porão
 	H4: O crescimento do preço dos imóveis (YoY) é de 10%
 	H5: Imoveis com 3 banheiros tem um crescimento de MoM de 15% no preço
-	H6: Imóveis reformados após o ano 2000 são 20% mais caros
-	H7: Imóveis 
-	H8:
+	H6: Houses renovated after 2000 are 20% more expensive than those between 1985 and 2000
+	H7: Imóveis que nunca foram reformados são 30% mais baratos
+	H8: 
 	H9:
 	H10:
 	
